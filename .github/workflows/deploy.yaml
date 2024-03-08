@@ -75,35 +75,35 @@ jobs:
           esac
         shell: bash
     
-  # frontend:
-  #   name: Build Frontend Project
-  #   runs-on: ubuntu-latest
-  #   needs: prepare
-  #   if: |
-  #     !contains(github.event.head_commit.message, 'skip-ci')
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
-  #     - name: Use Node.js 21.x
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '21.x'
-  #     - name: Install dependencies
-  #       run: |
-  #         npm ci
-  #         cd apps/web/ && npm ci
-  #     - name: build
-  #       run: cd apps/web/ && npm run build && npx next export
-  #       working-directory: ${{ env.project-directory }}
-  #     - uses: actions/upload-artifact@v2
-  #       with:
-  #         name: frontend-bundle
-  #         path: ${{ env.project-directory }}/apps/web/out
+  frontend:
+    name: Build Frontend Project
+    runs-on: ubuntu-latest
+    needs: prepare
+    if: |
+      !contains(github.event.head_commit.message, 'skip-ci')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Use Node.js 21.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '21.x'
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd apps/web/ && npm ci
+      - name: build
+        run: cd apps/web/ && npm run build && npx next export
+        working-directory: ${{ env.project-directory }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: frontend-bundle
+          path: ${{ env.project-directory }}/apps/web/out
   
   deploy:
     name: Deploy to S3
     runs-on: ubuntu-latest
-    needs: ['prepare']
+    needs: ['prepare', 'frontend']
     env:
       S3_BUCKET: ${{ needs.prepare.outputs.S3_BUCKET }}
       S3_ACCESS_KEY_ID: ${{ needs.prepare.outputs.S3_ACCESS_KEY_ID }}
@@ -124,8 +124,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ env.S3_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{ env.S3_SECRET_ACCESS_KEY}}
+          aws-access-key-id: ${{ secrets.S3_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.S3_SECRET_ACCESS_KEY}}
           aws-region: us-east-2
         
       - name: Copy frontend resources to S3

@@ -94,7 +94,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: frontend-bundle
-          path: build
+          path: /apps/web/public
   
   deploy:
     name: Deploy to S3
@@ -112,7 +112,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: frontend-bundle
-          path: build
+          path: /apps/web/public
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

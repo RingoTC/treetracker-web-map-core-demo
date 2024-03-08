@@ -2,6 +2,7 @@
   "name": "treetracker-web-map-core-demo-web",
   "version": "0.1.0",
   "private": true,
+  "distDir": "build",
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",

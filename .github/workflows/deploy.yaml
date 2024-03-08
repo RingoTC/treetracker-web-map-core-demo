@@ -41,7 +41,7 @@ jobs:
             branch_name=$(jq -r ".branches[$branch].name" <<< "$content")
             if [[ "$BRANCH_NAME" =~ $branch_name ]]; then
               channel=$(jq -r ".branches[$branch].channel" <<< "$content")
-              echo "::set-output name=channel::$channel"
+              echo "channel=$channel" >> $GITHUB_OUTPUT
               exit 0
             fi
           done
@@ -55,14 +55,14 @@ jobs:
           CHANNEL="${{ steps.get-channel.outputs.channel }}"
           case "$CHANNEL" in
             "rc")
-              echo "::set-output name=DIGITALOCEAN_TOKEN::${{ secrets.DEV_CDN_S3_BUCKET }}"
-              echo "::set-output name=S3_ACCESS_KEY_ID::${{ secrets.DEV_ACCESS_KEY_ID }}"
-              echo "::set-output name=S3_SECRET_ACCESS_KEY::${{ secrets.DEV_SECRET_ACCESS_KEY }}"  
+              echo "S3_BUCKET=${{ secrets.DEV_CDN_S3_BUCKET }}" >> $GITHUB_OUTPUT
+              echo "S3_ACCESS_KEY_ID=${{ secrets.DEV_ACCESS_KEY_ID }}" >> $GITHUB_OUTPUT
+              echo "S3_SECRET_ACCESS_KEY=${{ secrets.DEV_SECRET_ACCESS_KEY }}" >> $GITHUB_OUTPUT  
               ;;
             "alpha")
-              echo "::set-output name=DIGITALOCEAN_TOKEN::${{ secrets.DEV_CDN_S3_BUCKET }}"
-              echo "::set-output name=S3_ACCESS_KEY_ID::${{ secrets.DEV_ACCESS_KEY_ID }}"
-              echo "::set-output name=S3_SECRET_ACCESS_KEY::${{ secrets.DEV_SECRET_ACCESS_KEY }}"
+              echo "S3_BUCKET=${{ secrets.DEV_CDN_S3_BUCKET }}" >> $GITHUB_OUTPUT
+              echo "S3_ACCESS_KEY_ID=${{ secrets.DEV_ACCESS_KEY_ID }}" >> $GITHUB_OUTPUT
+              echo "S3_SECRET_ACCESS_KEY=${{ secrets.DEV_SECRET_ACCESS_KEY }}" >> $GITHUB_OUTPUT
               ;;
             *)
               echo "No token found for channel $CHANNEL"
@@ -87,7 +87,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          cd apps/web/&& npm ci
+          cd apps/web/ && npm ci
       - name: build
         run: cd apps/web/ && npm run build && npx next export
         working-directory: ${{ env.project-directory }}
@@ -122,6 +122,6 @@ jobs:
         
       - name: Copy frontend resources to S3
         run: |
-          aws s3 sync /apps/web/public s3://${{secrets[needs.prepare.outputs.S3_BUCKET]}} --delete
+          aws s3 sync /apps/web/out s3://${{secrets[needs.prepare.outputs.S3_BUCKET]}} --delete
         env:
           AWS_DEFAULT_REGION: us-east-2

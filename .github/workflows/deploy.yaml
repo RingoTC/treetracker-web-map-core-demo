@@ -104,6 +104,10 @@ jobs:
     name: Deploy to S3
     runs-on: ubuntu-latest
     needs: ['prepare', 'frontend']
+    env:
+      S3_BUCKET: ${{ needs.prepare.outputs.S3_BUCKET }}
+      S3_ACCESS_KEY_ID: ${{ needs.prepare.outputs.S3_ACCESS_KEY_ID }}
+      S3_SECRET_ACCESS_KEY: ${{ needs.prepare.outputs.S3_SECRET_ACCESS_KEY }}
     if: |
       github.repository == ${{ github.env.repository }}
     steps:
@@ -120,12 +124,12 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ needs.prepare.outputs.S3_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ needs.prepare.outputs.S3_SECRET_ACCESS_KEY }}
+          aws-access-key-id: env.S3_ACCESS_KEY_ID
+          aws-secret-access-key: env.S3_SECRET_ACCESS_KEY
           aws-region: us-east-2
         
       - name: Copy frontend resources to S3
         run: |
-          aws s3 sync /apps/web/out s3://${{secrets[needs.prepare.outputs.S3_BUCKET]}} --delete
+          aws s3 sync /apps/web/out s3://env.S3_BUCKET --delete
         env:
           AWS_DEFAULT_REGION: us-east-2

@@ -34,15 +34,7 @@ export default function Header({
         <Typography variant="h5">{title}</Typography>
       </Box>
       <Box>
-        <Typography variant="h6" color="primary">
-          {forwardLink instanceof Function ? (
-            <Button sx={{ textTransform: 'none' }} onClick={forwardLink}>
-              {forwardText}
-            </Button>
-          ) : (
-            <Link href={forwardLink}>{forwardText}</Link>
-          )}
-        </Typography>
+        <Typography variant="h6" color="primary"></Typography>
       </Box>
     </Box>
   );

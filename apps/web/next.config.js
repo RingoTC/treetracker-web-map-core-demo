@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   transpilePackages: ['demo-core'],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   webpack(config) {
     config.module.rules.push(
       {

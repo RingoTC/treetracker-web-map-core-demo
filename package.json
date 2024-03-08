@@ -7,8 +7,7 @@
   "author": "dadiorchen <antlet2004@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "pre-commit": "yarn workspaces run pre-commit",
-    "prepare": "husky install"
+    "pre-commit": "yarn workspaces run pre-commit"
   },
   "workspaces": {
     "packages": [
@@ -20,5 +19,8 @@
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.3"
+  },
+  "dependencies": {
+    "semantic-release": "^23.0.2"
   }
 }

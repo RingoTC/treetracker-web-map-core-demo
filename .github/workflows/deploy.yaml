@@ -113,6 +113,13 @@ jobs:
         with:
           name: frontend-bundle
           path: ${{ env.project-directory }}/apps/web/out
+      
+      - name: output
+        run: |
+          echo "S3_BUCKET: ${{ needs.prepare.outputs.S3_BUCKET }}"
+          echo "S3_ACCESS_KEY_ID: ${{ needs.prepare.outputs.S3_ACCESS_KEY_ID }}"
+          echo "S3_SECRET_ACCESS_KEY: ${{ needs.prepare.outputs.S3_SECRET_ACCESS_KEY }}"
+        shell: bash
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

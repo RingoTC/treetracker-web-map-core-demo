@@ -140,6 +140,6 @@ jobs:
         
       - name: Copy frontend resources to S3
         run: |
-          aws s3 sync /apps/web/out s3://${{env.S3_BUCKET}} --delete
+          aws s3 sync /apps/web/out s3://${{secrets.DEV_CDN_S3_BUCKET}} --delete
         env:
           AWS_DEFAULT_REGION: us-east-2

@@ -74,6 +74,13 @@ jobs:
               ;;
           esac
         shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{secrets.DEV_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.DEV_SECRET_ACCESS_KEY}}
+          aws-region: us-east-2
     
   frontend:
     name: Build Frontend Project
@@ -124,8 +131,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.S3_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{ secrets.S3_SECRET_ACCESS_KEY}}
+          aws-access-key-id: "han_liao"
+          aws-secret-access-key: "liaohan@1998"
           aws-region: us-east-2
         
       - name: Copy frontend resources to S3

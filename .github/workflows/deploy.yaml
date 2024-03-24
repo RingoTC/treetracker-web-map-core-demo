@@ -110,7 +110,7 @@ jobs:
   deploy:
     name: Deploy to S3
     runs-on: ubuntu-latest
-    needs: ['prepare']
+    needs: ['prepare', "frontend"]
     env:
       S3_BUCKET: ${{ needs.prepare.outputs.S3_BUCKET }}
       S3_ACCESS_KEY_ID: ${{ needs.prepare.outputs.S3_ACCESS_KEY_ID }}

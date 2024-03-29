@@ -23,10 +23,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get branch names
         id: branch-names
@@ -96,6 +92,15 @@ jobs:
         with:
           name: frontend-bundle
           path: ${{ env.project-directory }}/apps/web/out
+
+      
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Semantic Release
+        run: npx semantic-release
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

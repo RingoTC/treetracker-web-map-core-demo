@@ -1,5 +1,6 @@
 {
     "branches": [
+      "rc/test",
       {
         "name":"master",
         "channel": "rc",

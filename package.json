@@ -19,12 +19,12 @@
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.2"
   },
   "dependencies": {
-    "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.0.2",
     "@semantic-release/release-notes-generator": "^13.0.0",
     "semantic-release": "^23.0.2"

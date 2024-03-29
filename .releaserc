@@ -1,5 +1,6 @@
 {
     "branches": [
+      "alpha/addSemanticRelease",
       {
         "name":"master",
         "channel": "rc",

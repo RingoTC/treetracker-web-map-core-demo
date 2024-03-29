@@ -83,6 +83,9 @@ jobs:
     if: |
       github.repository == ${{ github.env.repository }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Print env
         run: |
           echo "Prepare outputs: ${{ toJson(needs.prepare.outputs) }}"

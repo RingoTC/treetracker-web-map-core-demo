@@ -66,7 +66,7 @@ const Home: NextPage = () => {
                   marginTop: '3rem',
                 }}
               >
-                Sign In | master
+                Sign In | alpha/glob
               </Typography>
               <Avatar
                 sx={{

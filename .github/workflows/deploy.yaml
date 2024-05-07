@@ -91,11 +91,10 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           cd apps/web/ && yarn install --frozen-lockfile
-      - name: Semantic-release
-        id: semantic-release
-        uses: codfish/semantic-release-action@v3
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npx semantic-release
       - name: Print env
         run: |
           echo "Prepare outputs: ${{ toJson(needs.prepare.outputs) }}"

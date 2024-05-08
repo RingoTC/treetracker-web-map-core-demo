@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:Ringotc/treetracker-web-map-core-demo.git",
-  "author": "dadiorchen <antlet2004@gmail.com>",
+  "author": "Han Liao <ringotc@outlook.com>",
   "license": "MIT",
   "scripts": {
     "pre-commit": "yarn workspaces run pre-commit"

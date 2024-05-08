@@ -1,21 +1,19 @@
 {
     "branches": [
+      "master",
       {
-        "name":"master",
-        "s3_bucket":"demo.treetracker.org"
-      },
-      {
-        "name":"alpha/**",
+        "name":"alpha",
         "channel": "alpha",
         "s3_bucket":"alpha-demo.treetracker.org"
       },
       {
-        "name":"beta/**",
+        "name":"beta",
         "channel": "beta"
       },
       {
-        "name":"rc/**",
-        "channel": "rc"
+        "name":"rc",
+        "channel": "rc",
+        "s3_bucket":"demo.treetracker.org"
       }
     ],
     "plugins": [

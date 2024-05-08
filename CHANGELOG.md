@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Ringotc/treetracker-web-map-core-demo/compare/v1.0.0...v1.0.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* 123 ([7095b73](https://github.com/Ringotc/treetracker-web-map-core-demo/commit/7095b739e4ec595cbdd64d57c1421f801773a8ea))
+
 # 1.0.0 (2024-05-08)
 
 

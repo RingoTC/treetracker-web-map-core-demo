@@ -78,6 +78,10 @@ jobs:
   deploy:
     name: Deploy to S3
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     needs: ['prepare', "frontend"]
     if: |
       github.repository == ${{ github.env.repository }}

@@ -1,6 +1,9 @@
 {
     "branches": [
-      "master",
+      {
+        "name":"master",
+        "s3_bucket":"demo.treetracker.org"
+      },
       {
         "name":"alpha",
         "channel": "alpha",
